@@ -97,7 +97,7 @@ def main():
 
     # Read in the levels from the text file. See the readLevelsFile() for
     # details on the format of this file and how to make your own levels.
-    levels = readLevelsFile('starPusherLevels.txt')
+    levels = readLevelsFile('levels.txt')
     currentLevelIndex = 0
 
     # The main game loop. This loop runs a single level, when the user
