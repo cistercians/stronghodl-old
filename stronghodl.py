@@ -85,7 +85,7 @@ def main():
 
     # PLAYERIMAGES is a list of all possible characters the player can be.
     # currentImage is the index of the player's current player image.
-    currentImage = 0
+    currentImage = 1
     PLAYERIMAGES = [IMAGESDICT['princess'],
                     IMAGESDICT['boy'],
                     IMAGESDICT['catgirl'],
