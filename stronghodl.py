@@ -21,11 +21,11 @@ CAM_MOVE_SPEED = 5 # how many pixels per frame the camera moves
 
 # The percentage of outdoor tiles that have additional
 # decoration on them, such as a tree or rock.
-OUTSIDE_DECORATION_PCT = 20
+OUTSIDE_DECORATION_PCT = 30
 
-BRIGHTBLUE = (  0, 170, 255)
+GREY = (128, 128, 128)
 WHITE      = (255, 255, 255)
-BGCOLOR = BRIGHTBLUE
+BGCOLOR = GREY
 TEXTCOLOR = WHITE
 
 UP = 'up'
@@ -120,11 +120,6 @@ def main():
                 currentLevelIndex = len(levels)-1
         elif result == 'reset':
             pass # Do nothing. Loop re-calls runLevel() to reset the level
-        
-######## MODDING STARTS HERE #########
-        
-
-########
 
 def runLevel(levels, levelNum):
     global currentImage
@@ -394,8 +389,7 @@ def startScreen():
     # Unfortunately, Pygame's font & text system only shows one line at
     # a time, so we can't use strings with \n newline characters in them.
     # So we will use a list with each line in it.
-    instructionText = ['Push the stars over the marks.',
-                       'Arrow keys to move, WASD for camera control, P to change character.',
+    instructionText = ['Arrow keys to move, WASD for camera control, P to change character.',
                        'Backspace to reset level, Esc to quit.',
                        'N for next level, B to go back a level.']
 
