@@ -1,7 +1,5 @@
-# Star Pusher (a Sokoban clone)
-# By Al Sweigart al@inventwithpython.com
-# http://inventwithpython.com/pygame
-# Released under a "Simplified BSD" license
+# Stronghodl v0.0.1
+# by Templar.ventures
 
 import random, sys, copy, os, pygame
 from pygame.locals import *
@@ -48,7 +46,7 @@ def main():
     # when pygame.display.update() is called.
     DISPLAYSURF = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
 
-    pygame.display.set_caption('Star Pusher')
+    pygame.display.set_caption('Stronghodl')
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
 
     # A global dict value that will contain all the Pygame
@@ -93,7 +91,8 @@ def main():
                     IMAGESDICT['pinkgirl']]
 
     startScreen() # show the title screen until the user presses a key
-    pygame.mixer.music.play(-1)
+
+    pygame.mixer.music.play(-1) # start playing music
 
     # Read in the levels from the text file. See the readLevelsFile() for
     # details on the format of this file and how to make your own levels.
@@ -243,18 +242,8 @@ def runLevel(levels, levelNum):
         DISPLAYSURF.blit(mapSurf, mapSurfRect)
 
         DISPLAYSURF.blit(levelSurf, levelRect)
-        stepSurf = BASICFONT.render('Steps: %s' % (gameStateObj['stepCounter']), 1, TEXTCOLOR)
-        stepRect = stepSurf.get_rect()
-        stepRect.bottomleft = (20, WINHEIGHT - 10)
-        DISPLAYSURF.blit(stepSurf, stepRect)
 
         if levelIsComplete:
-            # is solved, show the "Solved!" image until the player
-            # has pressed a key.
-            solvedRect = IMAGESDICT['solved'].get_rect()
-            solvedRect.center = (HALF_WINWIDTH, HALF_WINHEIGHT)
-            DISPLAYSURF.blit(IMAGESDICT['solved'], solvedRect)
-
             if keyPressed:
                 return 'solved'
 
