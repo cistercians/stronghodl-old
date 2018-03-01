@@ -60,11 +60,11 @@ def main():
                   'outside floor': pygame.image.load('Grass_Block.png'),
                   'title': pygame.image.load('star_title.png'),
                   'solved': pygame.image.load('star_solved.png'),
-                  'princess': pygame.image.load('princess.png'),
-                  'boy': pygame.image.load('boy.png'),
-                  'catgirl': pygame.image.load('catgirl.png'),
-                  'horngirl': pygame.image.load('horngirl.png'),
-                  'pinkgirl': pygame.image.load('pinkgirl.png'),
+                  'knight': pygame.image.load('knight.png'),
+                  'rogue': pygame.image.load('rogue.png'),
+                  'barbarian': pygame.image.load('barbarian.png'),
+                  'darklord': pygame.image.load('darklord.png'),
+                  'warlock': pygame.image.load('warlock.png'),
                   'rock': pygame.image.load('Rock.png'),
                   'short tree': pygame.image.load('Tree_Short.png'),
                   'tall tree': pygame.image.load('Tree_Tall.png'),
@@ -83,12 +83,12 @@ def main():
 
     # PLAYERIMAGES is a list of all possible characters the player can be.
     # currentImage is the index of the player's current player image.
-    currentImage = 1
-    PLAYERIMAGES = [IMAGESDICT['princess'],
-                    IMAGESDICT['boy'],
-                    IMAGESDICT['catgirl'],
-                    IMAGESDICT['horngirl'],
-                    IMAGESDICT['pinkgirl']]
+    currentImage = 0
+    PLAYERIMAGES = [IMAGESDICT['knight'],
+                    IMAGESDICT['rogue'],
+                    IMAGESDICT['barbarian'],
+                    IMAGESDICT['darklord'],
+                    IMAGESDICT['warlock']]
 
     startScreen() # show the title screen until the user presses a key
 

@@ -4,4 +4,4 @@ v0.0.1:
 -Added single background music file.
 -Disabled flood/fill algorithm
 -Increased % of outdoor foliage to 30%
--Flipped walk/camera commands (WASD/arrows)
+-Flipped walk/camera commands (WASD/arrows)-Reworked character sprites
