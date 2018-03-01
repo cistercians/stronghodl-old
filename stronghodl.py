@@ -37,7 +37,7 @@ def main():
 
     # Pygame initialization and basic set up of the global variables.
     pygame.init()
-    pygame.mixer.music.load("beaute_parfaite.mp3")
+    pygame.mixer.music.load("music/beaute_parfaite.mp3")
     FPSCLOCK = pygame.time.Clock()
 
     # Because the Surface object stored in DISPLAYSURF was returned
