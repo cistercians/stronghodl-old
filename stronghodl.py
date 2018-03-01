@@ -31,13 +31,40 @@ DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
 
+soundtrack = ['music/overworld/Amoureux.mp3',
+            'music/overworld/Aventure.mp3',
+            'music/overworld/Beaute_parfaite.mp3',
+            'music/overworld/Chanconeta.mp3',
+            'music/overworld/Constantia.mp3',
+            'music/overworld/Corps_femenin.mp3',
+            'music/overworld/Falla_con_Misuras.mp3',
+            'music/overworld/Gedeon_et_Sanson.mp3',
+            'music/overworld/Gentil_cuer.mp3',
+            'music/overworld/La_verdelete.mp3',
+            'music/overworld/Liement.mp3',
+            'music/overworld/Se_zephirus.mp3',
+            'music/overworld/Tout.mp3]']
+
+_currently_playing = None
+
+SONG_END = pygame.USEREVENT + 1
+
+pygame.mixer.music.set_endevent(SONG_END)
+
+def play_next_song():
+    global _currently_playing, soundtrack
+    next_song = random.choice(soundtrack)
+    while next_song == _currently_playing:
+        next_song = random.choice(soundtrack)
+    _currently_playing = next_song
+    pygame.mixer.music.load(next_song)
+    pygame.mixer.music.play()
 
 def main():
     global FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT, PLAYERIMAGES, currentImage
 
     # Pygame initialization and basic set up of the global variables.
     pygame.init()
-    pygame.mixer.music.load("music/beaute_parfaite.mp3")
     FPSCLOCK = pygame.time.Clock()
 
     # Because the Surface object stored in DISPLAYSURF was returned
@@ -91,8 +118,8 @@ def main():
                     IMAGESDICT['warlock']]
 
     startScreen() # show the title screen until the user presses a key
-
-    pygame.mixer.music.play(-1) # start playing music
+    pygame.mixer.music.stop()
+    play_next_song()
 
     # Read in the levels from the text file. See the readLevelsFile() for
     # details on the format of this file and how to make your own levels.
@@ -203,6 +230,9 @@ def runLevel(levels, levelNum):
                     cameraUp = False
                 elif event.key == K_DOWN:
                     cameraDown = False
+
+            elif event.type == SONG_END:
+                play_next_song()
 
         if playerMoveTo != None and not levelIsComplete:
             # If the player pushed a key to move, make the move
@@ -374,6 +404,8 @@ def startScreen():
     titleRect.top = topCoord
     titleRect.centerx = HALF_WINWIDTH
     topCoord += titleRect.height
+    pygame.mixer.music.load('music/Miri_it_is.mp3')
+    pygame.mixer.music.play(-1)
 
     # Unfortunately, Pygame's font & text system only shows one line at
     # a time, so we can't use strings with \n newline characters in them.
