@@ -427,13 +427,13 @@ def startScreen():
     titleRect.top = topCoord
     titleRect.centerx = HALF_WINWIDTH
     topCoord += titleRect.height
-    pygame.mixer.music.load('music/Miri_it_is.mp3')
+    pygame.mixer.music.load('music/Miri_it_is.mp3') # Intro music
     pygame.mixer.music.play(-1)
 
     # Unfortunately, Pygame's font & text system only shows one line at
     # a time, so we can't use strings with \n newline characters in them.
     # So we will use a list with each line in it.
-    instructionText = ['Arrow keys to move, WASD for camera control, P to change character.',
+    instructionText = ['WASD to move, arrow keys for camera control, P to change character.',
                        'Backspace to reset level, Esc to quit.',
                        'N for next level, B to go back a level.']
 
