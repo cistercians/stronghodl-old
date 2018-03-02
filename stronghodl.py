@@ -87,15 +87,26 @@ def main():
                   'outside floor': pygame.image.load('Grass_Block.png'),
                   'title': pygame.image.load('star_title.png'),
                   'solved': pygame.image.load('star_solved.png'),
-                  'knight': pygame.image.load('knight.png'),
-                  'rogue': pygame.image.load('rogue.png'),
-                  'barbarian': pygame.image.load('barbarian.png'),
-                  'darklord': pygame.image.load('darklord.png'),
-                  'warlock': pygame.image.load('warlock.png'),
+                  'knight': pygame.image.load('sprites/knight.png'),
+                  'rogue': pygame.image.load('sprites/rogue.png'),
+                  'barbarian': pygame.image.load('sprites/barbarian.png'),
+                  'darklord': pygame.image.load('sprites/darklord.png'),
+                  'warlock': pygame.image.load('sprites/warlock.png'),
                   'rock': pygame.image.load('Rock.png'),
                   'short tree': pygame.image.load('Tree_Short.png'),
                   'tall tree': pygame.image.load('Tree_Tall.png'),
-                  'ugly tree': pygame.image.load('Tree_Ugly.png')}
+                  'ugly tree': pygame.image.load('Tree_Ugly.png'),
+                  'acolyte': pygame.image.load('sprites/acolyte.png'),
+                  'adventurer': pygame.image.load('sprites/adventurer.png'),
+                  'bandit': pygame.image.load('sprites/bandit.png'),
+                  'chieftain': pygame.image.load('sprites/chieftain.png'),
+                  'druid': pygame.image.load('sprites/druid.png'),
+                  'highpriest': pygame.image.load('sprites/highpriest.png'),
+                  'king': pygame.image.load('sprites/king.png'),
+                  'paladin': pygame.image.load('sprites/paladin.png'),
+                  'priest': pygame.image.load('sprites/priest.png'),
+                  'ranger': pygame.image.load('sprites/ranger.png'),
+                  'skelly': pygame.image.load('sprites/skelly.png'),}
 
     # These dict values are global, and map the character that appears
     # in the level file to the Surface object it represents.
@@ -115,7 +126,18 @@ def main():
                     IMAGESDICT['rogue'],
                     IMAGESDICT['barbarian'],
                     IMAGESDICT['darklord'],
-                    IMAGESDICT['warlock']]
+                    IMAGESDICT['warlock'],
+                    IMAGESDICT['acolyte'],
+                    IMAGESDICT['adventurer'],
+                    IMAGESDICT['bandit'],
+                    IMAGESDICT['chieftain'],
+                    IMAGESDICT['druid'],
+                    IMAGESDICT['highpriest'],
+                    IMAGESDICT['king'],
+                    IMAGESDICT['paladin'],
+                    IMAGESDICT['priest'],
+                    IMAGESDICT['ranger'],
+                    IMAGESDICT['skelly']]
 
     startScreen() # show the title screen until the user presses a key
     pygame.mixer.music.stop()
