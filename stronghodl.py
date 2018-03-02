@@ -43,7 +43,7 @@ soundtrack = ['music/overworld/Amoureux.mp3',
             'music/overworld/La_verdelete.mp3',
             'music/overworld/Liement.mp3',
             'music/overworld/Se_zephirus.mp3',
-            'music/overworld/Tout.mp3]']
+            'music/overworld/Tout_par_compas.mp3']
 
 _currently_playing = None
 
