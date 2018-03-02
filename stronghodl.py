@@ -157,6 +157,7 @@ def main():
         if result in ('solved', 'next'):
             # Go to the next level.
             currentLevelIndex += 1
+            play_next_song()
             if currentLevelIndex >= len(levels):
                 # If there are no more levels, go back to the first one.
                 currentLevelIndex = 0
