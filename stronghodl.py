@@ -225,15 +225,17 @@ def runLevel(levels, levelNum):
 
         #skelly move
         freq = 10
-        if len(enemies) > 0 and random.randint(0, freq*2) < 1:
-            if random.randint(0,freq) > 7:
-                (random.choice(enemies)).x += 1
-            elif random.randint(0,freq) > 5:
-                (random.choice(enemies)).y -= 1
-            elif random.randint(0,freq) > 3:
-                (random.choice(enemies)).x -= 1
-            elif random.randint(0,freq) > 1:
-                (random.choice(enemies)).y += 1
+        if len(enemies) > 0 and random.randint(0, freq) < 1:
+            eny = (random.choice(enemies))
+            
+            if random.randint(0,freq) > 7  and eny.x < len(mapObj) - 3:
+                eny.x += 1
+            elif random.randint(0,freq) > 5 and eny.y > 1:
+                eny.y -= 1
+            elif random.randint(0,freq) > 3 and eny.x > 1:
+                eny.x -= 1
+            elif random.randint(0,freq) > 1 and eny.y < len(mapObj[eny.x]) - 1:
+                eny.y += 1
 
 
         for event in pygame.event.get(): # event handling loop
@@ -455,7 +457,6 @@ def makeMove(mapObj, gameStateObj, playerMoveTo):
         gameStateObj['player'] = (playerx + xOffset, playery + yOffset)
         return True
 
-
 def startScreen():
     """Display the start screen (which has the title and instructions)
     until the player presses a key. Returns None."""
@@ -664,7 +665,7 @@ def drawMap(mapObj, gameStateObj, goals):
                 mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect)
             elif (x, y) in gameStateObj['enemySpawner']:
                 #draw spawner with king sprite
-                mapSurf.blit(IMAGESDICT['king'], spaceRect);
+                mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect);
 
             # Last draw the player on the board.
             if (x, y) == gameStateObj['player']:
