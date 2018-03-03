@@ -4,9 +4,9 @@
 import random, sys, copy, os, pygame
 from pygame.locals import *
 
-FPS = 60 # frames per second to update the screen
-WINWIDTH = 1000 # width of the program's window, in pixels
-WINHEIGHT = 800 # height in pixels
+FPS = 30 # frames per second to update the screen
+WINWIDTH = 800 # width of the program's window, in pixels
+WINHEIGHT = 600 # height in pixels
 HALF_WINWIDTH = int(WINWIDTH / 2)
 HALF_WINHEIGHT = int(WINHEIGHT / 2)
 
@@ -15,7 +15,7 @@ TILEWIDTH = 50
 TILEHEIGHT = 85
 TILEFLOORHEIGHT = 40
 
-CAM_MOVE_SPEED = 5 # how many pixels per frame the camera moves
+CAM_MOVE_SPEED = 30 # how many pixels per frame the camera moves
 
 # The percentage of outdoor tiles that have additional
 # decoration on them, such as a tree or rock.
@@ -475,6 +475,7 @@ def startScreen():
     # So we will use a list with each line in it.
     instructionText = ['WASD to move, arrow keys for camera control, P to change character.',
                        'Backspace to reset level, Esc to quit.',
+                       'K to spawn an enemy.',
                        'N for next level, B to go back a level.']
 
     # Start with drawing a blank color to the entire window:

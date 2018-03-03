@@ -12,6 +12,7 @@
 ;   . - A goal where a star needs to be pushed.
 ;   + - Player & goal
 ;   * - Star & goal
+;   k - monster spawn
 ;  (space) - an empty open space.
 ;   # - A wall.
 ;
@@ -26,14 +27,14 @@
 
 
 ##################
-#k              k# 
-#$              $#
-#$              $#
-#$              $#
-#$              $#
-#$              $#
-#$              $#
-#$              $#
+#                # 
+# k            k #
+#                #
+#                #
+#                #
+#                #
+#                #
+#                #
 #.      @       .#
 ##################
 
