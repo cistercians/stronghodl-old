@@ -221,7 +221,7 @@ def main():
         elif result == 'reset':
             pass # Do nothing. Loop re-calls runLevel() to reset the level
 
-#https://codereview.stackexchange.com/questions/60571/battle-a-random-enemy
+# https://codereview.stackexchange.com/questions/60571/battle-a-random-enemy
 class Character:
     
     def __init__(self, health):
@@ -526,6 +526,7 @@ def startScreen():
     # So we will use a list with each line in it.
     instructionText = ['WASD to move, arrow keys for camera control, P to change character.',
                        'Backspace to reset level, Esc to quit.',
+                       'K to spawn enemies.',
                        'N for next level, B to go back a level.']
 
     # Start with drawing a blank color to the entire window:
