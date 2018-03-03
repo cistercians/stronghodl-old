@@ -4,9 +4,9 @@
 import random, sys, copy, os, pygame
 from pygame.locals import *
 
-FPS = 30 # frames per second to update the screen
-WINWIDTH = 800 # width of the program's window, in pixels
-WINHEIGHT = 600 # height in pixels
+FPS = 60 # frames per second to update the screen
+WINWIDTH = 1000 # width of the program's window, in pixels
+WINHEIGHT = 800 # height in pixels
 HALF_WINWIDTH = int(WINWIDTH / 2)
 HALF_WINHEIGHT = int(WINHEIGHT / 2)
 
@@ -170,6 +170,30 @@ def main():
         elif result == 'reset':
             pass # Do nothing. Loop re-calls runLevel() to reset the level
 
+#https://codereview.stackexchange.com/questions/60571/battle-a-random-enemy
+class Character:
+    
+    def __init__(self, health):
+        self.health = health
+        
+    def attack(self, other):
+        raise NotImplementedError
+    
+class Enemy(Character):
+    
+    def __init__(self, name, health, x, y):
+        super().__init__(health)
+        self.name = name
+        self.x = x
+        self.y = y
+        
+enemies = []
+#when do monsters spawn?
+def monsters( enemySpawner):
+    x, y = enemySpawner[random.randint(0, len(enemySpawner) - 1)]
+    enemies.append( Enemy('skele', 10, x, y) )
+        
+
 def runLevel(levels, levelNum):
     global currentImage
     levelObj = levels[levelNum]
@@ -199,6 +223,21 @@ def runLevel(levels, levelNum):
         playerMoveTo = None
         keyPressed = False
 
+        #skelly move
+        freq = 10
+        if len(enemies) > 0 and random.randint(0, freq) < 1:
+            eny = (random.choice(enemies))
+            
+            if random.randint(0,freq) > 7  and eny.x < len(mapObj) - 3:
+                eny.x += 1
+            elif random.randint(0,freq) > 5 and eny.y > 1:
+                eny.y -= 1
+            elif random.randint(0,freq) > 3 and eny.x > 1:
+                eny.x -= 1
+            elif random.randint(0,freq) > 1 and eny.y < len(mapObj[eny.x]) - 1:
+                eny.y += 1
+
+
         for event in pygame.event.get(): # event handling loop
             if event.type == QUIT:
                 # Player clicked the "X" at the corner of the window.
@@ -215,6 +254,8 @@ def runLevel(levels, levelNum):
                     playerMoveTo = UP
                 elif event.key == K_s:
                     playerMoveTo = DOWN
+                elif event.key == K_k:
+                    monsters(gameStateObj['enemySpawner'])
 
                 # Set the camera move mode.
                 elif event.key == K_LEFT:
@@ -276,7 +317,7 @@ def runLevel(levels, levelNum):
 
         if mapNeedsRedraw:
             mapSurf = drawMap(mapObj, gameStateObj, levelObj['goals'])
-            mapNeedsRedraw = False
+            #mapNeedsRedraw = False
 
         if cameraUp and cameraOffsetY < MAX_CAM_X_PAN:
             cameraOffsetY += CAM_MOVE_SPEED
@@ -331,7 +372,7 @@ def decorateMap(mapObj, startxy):
     # Remove the non-wall characters from the map data
     for x in range(len(mapObjCopy)):
         for y in range(len(mapObjCopy[0])):
-            if mapObjCopy[x][y] in ('$', '.', '@', '+', '*'):
+            if mapObjCopy[x][y] in ('$', '.', '@', '+', '*','k'):
                 mapObjCopy[x][y] = ' '
 
     # Flood fill to determine inside/outside floor tiles.
@@ -416,7 +457,6 @@ def makeMove(mapObj, gameStateObj, playerMoveTo):
         gameStateObj['player'] = (playerx + xOffset, playery + yOffset)
         return True
 
-
 def startScreen():
     """Display the start screen (which has the title and instructions)
     until the player presses a key. Returns None."""
@@ -478,6 +518,7 @@ def readLevelsFile(filename):
     levelNum = 0
     mapTextLines = [] # contains the lines for a single level's map.
     mapObj = [] # the map object made from the data in mapTextLines
+    enemySpawner = [] # map which contain spawn locations
     for lineNum in range(len(content)):
         # Process each line that was in the level file.
         line = content[lineNum].rstrip('\r\n')
@@ -510,7 +551,7 @@ def readLevelsFile(filename):
                 for x in range(maxWidth):
                     mapObj[x].append(mapTextLines[y][x])
 
-            # Loop through the spaces in the map and find the @, ., and $
+            # Loop through the spaces in the map and find the @, ., $, and k
             # characters for the starting game state.
             startx = None # The x and y for the player's starting position
             starty = None
@@ -528,6 +569,9 @@ def readLevelsFile(filename):
                     if mapObj[x][y] in ('$', '*'):
                         # '$' is star
                         stars.append((x, y))
+                    if mapObj[x][y] in ('k'):
+                        enemySpawner.append((x, y));
+                        # 'k' is enemy spawner
 
             # Basic level design sanity checks:
             #assert startx != None and starty != None, 'Level %s (around line %s) in %s is missing a "@" or "+" to mark the start point.' % (levelNum+1, lineNum, filename)
@@ -535,20 +579,26 @@ def readLevelsFile(filename):
             #assert len(stars) >= len(goals), 'Level %s (around line %s) in %s is impossible to solve. It has %s goals but only %s stars.' % (levelNum+1, lineNum, filename, len(goals), len(stars))
 
             # Create level object and starting game state object.
-            gameStateObj = {'player': (startx, starty),
-                            'stepCounter': 0,
-                            'stars': stars}
-            levelObj = {'width': maxWidth,
-                        'height': len(mapObj),
-                        'mapObj': mapObj,
-                        'goals': goals,
-                        'startState': gameStateObj}
+            gameStateObj = {
+                'player': (startx, starty),
+                'stepCounter': 0,
+                'stars': stars,
+                'enemySpawner': enemySpawner
+            }
+            levelObj = {
+                'width': maxWidth,
+                'height': len(mapObj),
+                'mapObj': mapObj,
+                'goals': goals,
+                'startState': gameStateObj
+            }
 
             levels.append(levelObj)
 
             # Reset the variables for reading the next map.
             mapTextLines = []
             mapObj = []
+            enemySpawner = []
             gameStateObj = {}
             levelNum += 1
     return levels
@@ -613,6 +663,9 @@ def drawMap(mapObj, gameStateObj, goals):
             elif (x, y) in goals:
                 # Draw a goal without a star on it.
                 mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect)
+            elif (x, y) in gameStateObj['enemySpawner']:
+                #draw spawner with king sprite
+                mapSurf.blit(IMAGESDICT['uncovered goal'], spaceRect);
 
             # Last draw the player on the board.
             if (x, y) == gameStateObj['player']:
@@ -620,6 +673,11 @@ def drawMap(mapObj, gameStateObj, goals):
                 # to a key in "PLAYERIMAGES" which has the
                 # specific player image we want to show.
                 mapSurf.blit(PLAYERIMAGES[currentImage], spaceRect)
+
+            if len(enemies) > 0:
+                for i in enemies:
+                    if i.x == x and i.y == y:
+                        mapSurf.blit(IMAGESDICT['skelly'], spaceRect)
 
     return mapSurf
 
