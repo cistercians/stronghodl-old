@@ -11,3 +11,4 @@ v0.0.2
 
 -John C. added NPC spawning
 -Environment graphics overhaul to new sprites
+-Built events foundation for day/night cycle
