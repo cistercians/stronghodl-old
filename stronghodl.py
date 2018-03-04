@@ -64,9 +64,9 @@ def play_next_song():
 
 # Day/Night Cycle
 
-pygame.time.set_timer(USEREVENT+2, 60000) # milliseconds for each change
+pygame.time.set_timer(USEREVENT+2, 300000) # milliseconds for each change
 
-i = 0
+daynight = 0
 
 periods = ['Dawn',
            'Early Morning',
@@ -84,12 +84,12 @@ periods = ['Dawn',
 currentperiod = None
 
 def daynightCycle():
-    global i
-    currentPeriod = periods[i]
-    if i < 11:
-        i+=1
+    global daynight
+    currentPeriod = periods[daynight]
+    if daynight < 11:
+        daynight+=1
     else:
-        i = 0
+        daynight = 0
     print('It is now '+currentPeriod+'.')
 
 def main():
