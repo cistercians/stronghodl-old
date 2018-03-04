@@ -10,3 +10,4 @@ v0.0.1:
 v0.0.2
 
 -John C. added NPC spawning
+-Environment graphics overhaul to new sprites
