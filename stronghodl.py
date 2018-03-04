@@ -239,7 +239,7 @@ class Enemy(Character):
         self.y = y
         
 enemies = []
-#when do monsters spawn?
+# when do monsters spawn?
 def monsters( enemySpawner):
     x, y = enemySpawner[random.randint(0, len(enemySpawner) - 1)]
     enemies.append( Enemy('skele', 10, x, y) )
