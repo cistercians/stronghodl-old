@@ -45,11 +45,34 @@ soundtrack = ['music/overworld/Amoureux.mp3',
             'music/overworld/Se_zephirus.mp3',
             'music/overworld/Tout_par_compas.mp3']
 
+# Soundtrack
+
 _currently_playing = None
 
 SONG_END = pygame.USEREVENT + 1
 
 pygame.mixer.music.set_endevent(SONG_END)
+
+# Day/Night Cycle
+
+pygame.time.set_timer(USEREVENT+1, 60000) # milliseconds for each change
+
+i = 0
+
+periods = ['Dawn',
+           'Early Morning',
+           'Morning',
+           'Noon',
+           'Day',
+           'Afternoon',
+           'Dusk',
+           'Twilight',
+           'Evening',
+           'Night',
+           'Midnight',
+           'Witching Hour']
+
+currentperiod = None
 
 def play_next_song():
     global _currently_playing, soundtrack
@@ -242,8 +265,7 @@ enemies = []
 # when do monsters spawn?
 def monsters( enemySpawner):
     x, y = enemySpawner[random.randint(0, len(enemySpawner) - 1)]
-    enemies.append( Enemy('skele', 10, x, y) )
-        
+    enemies.append( Enemy('skele', 10, x, y) )      
 
 def runLevel(levels, levelNum):
     global currentImage
@@ -345,6 +367,19 @@ def runLevel(levels, levelNum):
                     cameraUp = False
                 elif event.key == K_DOWN:
                     cameraDown = False
+
+            # Day/night cycle event handling
+
+            elif event.type == USEREVENT+1:
+                global i
+                currentPeriod = periods[i]
+                if i < 11:
+                    i+=1
+                else:
+                    i = 0
+                print('It is now '+currentPeriod+'.')
+
+            # Play next song when a song ends
 
             elif event.type == SONG_END:
                 play_next_song()
