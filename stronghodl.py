@@ -64,7 +64,7 @@ def play_next_song():
 
 # Day/Night Cycle
 
-pygame.time.set_timer(USEREVENT+2, 5000) # milliseconds for each change
+pygame.time.set_timer(USEREVENT+2, 60000) # milliseconds for each change
 
 i = 0
 
@@ -382,6 +382,9 @@ def runLevel(levels, levelNum):
 
             elif event.type == SONG_END:
                 play_next_song()
+
+            elif event.type == USEREVENT+2:
+                daynightCycle()
 
         if playerMoveTo != None and not levelIsComplete:
             # If the player pushed a key to move, make the move
