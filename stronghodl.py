@@ -31,6 +31,8 @@ DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
 
+# Soundtrack
+
 soundtrack = ['music/overworld/Amoureux.mp3',
             'music/overworld/Aventure.mp3',
             'music/overworld/Beaute_parfaite.mp3',
@@ -45,17 +47,24 @@ soundtrack = ['music/overworld/Amoureux.mp3',
             'music/overworld/Se_zephirus.mp3',
             'music/overworld/Tout_par_compas.mp3']
 
-# Soundtrack
-
 _currently_playing = None
 
 SONG_END = pygame.USEREVENT + 1
 
 pygame.mixer.music.set_endevent(SONG_END)
 
+def play_next_song():
+    global _currently_playing, soundtrack
+    next_song = random.choice(soundtrack)
+    while next_song == _currently_playing:
+        next_song = random.choice(soundtrack)
+    _currently_playing = next_song
+    pygame.mixer.music.load(next_song)
+    pygame.mixer.music.play()
+
 # Day/Night Cycle
 
-pygame.time.set_timer(USEREVENT+1, 60000) # milliseconds for each change
+pygame.time.set_timer(USEREVENT+2, 5000) # milliseconds for each change
 
 i = 0
 
@@ -74,14 +83,14 @@ periods = ['Dawn',
 
 currentperiod = None
 
-def play_next_song():
-    global _currently_playing, soundtrack
-    next_song = random.choice(soundtrack)
-    while next_song == _currently_playing:
-        next_song = random.choice(soundtrack)
-    _currently_playing = next_song
-    pygame.mixer.music.load(next_song)
-    pygame.mixer.music.play()
+def daynightCycle():
+    global i
+    currentPeriod = periods[i]
+    if i < 11:
+        i+=1
+    else:
+        i = 0
+    print('It is now '+currentPeriod+'.')
 
 def main():
     global FPSCLOCK, DISPLAYSURF, IMAGESDICT, TILEMAPPING, OUTSIDEDECOMAPPING, BASICFONT, PLAYERIMAGES, currentImage
@@ -296,7 +305,8 @@ def runLevel(levels, levelNum):
         playerMoveTo = None
         keyPressed = False
 
-        #skelly move
+        # Enemy movement
+        
         freq = 10
         if len(enemies) > 0 and random.randint(0, freq) < 1:
             eny = (random.choice(enemies))
@@ -355,7 +365,7 @@ def runLevel(levels, levelNum):
                     if currentImage >= len(PLAYERIMAGES):
                         # After the last player image, use the first one.
                         currentImage = 0
-                    mapNeedsRedraw = True
+                    mapNeedsRedraw = True       
 
             elif event.type == KEYUP:
                 # Unset the camera move mode.
@@ -367,17 +377,6 @@ def runLevel(levels, levelNum):
                     cameraUp = False
                 elif event.key == K_DOWN:
                     cameraDown = False
-
-            # Day/night cycle event handling
-
-            elif event.type == USEREVENT+1:
-                global i
-                currentPeriod = periods[i]
-                if i < 11:
-                    i+=1
-                else:
-                    i = 0
-                print('It is now '+currentPeriod+'.')
 
             # Play next song when a song ends
 
