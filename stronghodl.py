@@ -5,8 +5,8 @@ import random, sys, copy, os, pygame
 from pygame.locals import *
 
 FPS = 30 # frames per second to update the screen
-WINWIDTH = 800 # width of the program's window, in pixels
-WINHEIGHT = 600 # height in pixels
+WINWIDTH = 1024 # width of the program's window, in pixels
+WINHEIGHT = 768 # height in pixels
 HALF_WINWIDTH = int(WINWIDTH / 2)
 HALF_WINHEIGHT = int(WINHEIGHT / 2)
 
@@ -164,7 +164,8 @@ def main():
                   'arachnid' : pygame.image.load('sprites/arachnid.png'),
                   'witch' : pygame.image.load('sprites/witch.png'),
                   'bandit2' : pygame.image.load('sprites/bandit2.png'),
-                  'serf6'  : pygame.image.load('sprites/serf6.png')} 
+                  'serf6'  : pygame.image.load('sprites/serf6.png'),
+                  'enforcer'  : pygame.image.load('sprites/enforcer.png')} 
 
     # These dict values are global, and map the character that appears
     # in the level file to the Surface object it represents.
@@ -221,7 +222,7 @@ def main():
                     IMAGESDICT['witch'],
                     IMAGESDICT['bandit2'],
                     IMAGESDICT['serf6']]
-
+                   
     startScreen() # show the title screen until the user presses a key
     pygame.mixer.music.stop()
     play_next_song()
@@ -716,6 +717,28 @@ def floodFill(mapObj, x, y, oldCharacter, newCharacter):
 
 
 def drawMap(mapObj, gameStateObj, goals):
+    ENEMYIMAGES = [IMAGESDICT['bandit'],
+                   IMAGESDICT['bandit2'],
+                   IMAGESDICT['arachnid'],
+                   IMAGESDICT['barbarian'],
+                   IMAGESDICT['crusader'],
+                   IMAGESDICT['darklord'],
+                   IMAGESDICT['demon'],
+                   IMAGESDICT['freak'],
+                   IMAGESDICT['frozenknight'],
+                   IMAGESDICT['enforcer'],
+                   IMAGESDICT['highwayman'],
+                   IMAGESDICT['minion'],
+                   IMAGESDICT['ringleader'],
+                   IMAGESDICT['spellcaster'],
+                   IMAGESDICT['strongman'],
+                   IMAGESDICT['thing'],
+                   IMAGESDICT['skelly'],
+                   IMAGESDICT['witch'],
+                   IMAGESDICT['wizard']]
+
+    spawnchoice = random.choice(ENEMYIMAGES)
+    
     """Draws the map to a Surface object, including the player and
     stars. This function does not call pygame.display.update(), nor
     does it draw the "Level" and "Steps" text in the corner."""
@@ -769,7 +792,6 @@ def drawMap(mapObj, gameStateObj, goals):
                         mapSurf.blit(IMAGESDICT['skelly'], spaceRect)
 
     return mapSurf
-
 
 def isLevelFinished(levelObj, gameStateObj):
     """Returns True if all the goals have stars in them."""
