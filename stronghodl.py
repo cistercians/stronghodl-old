@@ -144,7 +144,6 @@ def main():
                   'freak' : pygame.image.load('sprites/characters/freak.png'),
                   'demon' : pygame.image.load('sprites/characters/demon.png'),
                   'guard' : pygame.image.load('sprites/characters/guard.png'),
-                  'adventurer2' : pygame.image.load('sprites/characters/adventurer2.png'),
                   'serf1' : pygame.image.load('sprites/characters/serf1.png'),
                   'merchant' : pygame.image.load('sprites/characters/merchant.png'),
                   'spellcaster' : pygame.image.load('sprites/characters/spellcaster.png'),
@@ -153,7 +152,6 @@ def main():
                   'serf4' : pygame.image.load('sprites/characters/serf4.png'),
                   'militia' : pygame.image.load('sprites/characters/militia.png'),
                   'serf5' : pygame.image.load('sprites/characters/serf5.png'),
-                  'adventurer3' : pygame.image.load('sprites/characters/adventurer3.png'),
                   'engineer' : pygame.image.load('sprites/characters/engineer.png'),
                   'frozenknight' : pygame.image.load('sprites/characters/frozenknight.png'),
                   'wizard' : pygame.image.load('sprites/characters/wizard.png'),
@@ -162,7 +160,6 @@ def main():
                   'crusader' : pygame.image.load('sprites/characters/crusader.png'),
                   'arachnid' : pygame.image.load('sprites/characters/arachnid.png'),
                   'witch' : pygame.image.load('sprites/characters/witch.png'),
-                  'bandit2' : pygame.image.load('sprites/characters/bandit2.png'),
                   'serf6'  : pygame.image.load('sprites/characters/serf6.png'),
                   'enforcer'  : pygame.image.load('sprites/characters/enforcer.png')} 
 
@@ -170,7 +167,7 @@ def main():
     # in the level file to the Surface object it represents.
     TILEMAPPING = {'x': IMAGESDICT['corner'],
                    '#': IMAGESDICT['wall'],
-                   'o': IMAGESDICT['outside floor'],
+                   'o': IMAGESDICT['inside floor'],
                    ' ': IMAGESDICT['outside floor']}
     OUTSIDEDECOMAPPING = {'1': IMAGESDICT['rock'],
                           '2': IMAGESDICT['short tree'],
@@ -200,7 +197,6 @@ def main():
                     IMAGESDICT['freak'],
                     IMAGESDICT['demon'],
                     IMAGESDICT['guard'],
-                    IMAGESDICT['adventurer2'],
                     IMAGESDICT['serf1'],
                     IMAGESDICT['merchant'],
                     IMAGESDICT['spellcaster'],
@@ -209,7 +205,6 @@ def main():
                     IMAGESDICT['serf4'],
                     IMAGESDICT['militia'],
                     IMAGESDICT['serf5'],
-                    IMAGESDICT['adventurer3'],
                     IMAGESDICT['engineer'],
                     IMAGESDICT['frozenknight'],
                     IMAGESDICT['wizard'],
@@ -218,7 +213,6 @@ def main():
                     IMAGESDICT['crusader'],
                     IMAGESDICT['arachnid'],
                     IMAGESDICT['witch'],
-                    IMAGESDICT['bandit2'],
                     IMAGESDICT['serf6']]
                    
     startScreen() # show the title screen until the user presses a key
@@ -717,7 +711,6 @@ def floodFill(mapObj, x, y, oldCharacter, newCharacter):
 def drawMap(mapObj, gameStateObj, goals):
     
     ENEMYIMAGES = [IMAGESDICT['bandit'],
-                   IMAGESDICT['bandit2'],
                    IMAGESDICT['arachnid'],
                    IMAGESDICT['barbarian'],
                    IMAGESDICT['crusader'],
