@@ -133,7 +133,7 @@ def main():
                   'adventurer': pygame.image.load('sprites/characters/adventurer.png'),
                   'bandit': pygame.image.load('sprites/characters/bandit.png'),
                   'warlord': pygame.image.load('sprites/characters/warlord.png'),
-                  'seer': pygame.image.load('sprites/characters/seer.png'),
+                  'monk': pygame.image.load('sprites/characters/monk.png'),
                   'king': pygame.image.load('sprites/characters/king.png'),
                   'paladin': pygame.image.load('sprites/characters/paladin.png'),
                   'priest': pygame.image.load('sprites/characters/priest.png'),
@@ -213,7 +213,8 @@ def main():
                     IMAGESDICT['crusader'],
                     IMAGESDICT['arachnid'],
                     IMAGESDICT['witch'],
-                    IMAGESDICT['serf6']]
+                    IMAGESDICT['serf6'],
+                    IMAGESDICT['monk']]
                    
     startScreen() # show the title screen until the user presses a key
     pygame.mixer.music.stop()
