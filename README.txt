@@ -1,6 +1,6 @@
 v0.0.1:
 
--Modified game files to consider all of environment "outside".
+-Modified floodfill algo to consider all of environment "outside".
 -Added looping soundtrack
 -Disabled flood/fill algorithm
 -Increased % of outdoor foliage to 30%
